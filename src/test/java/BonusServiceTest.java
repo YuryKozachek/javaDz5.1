@@ -1,46 +1,43 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class BonusServiceTest {
-    @Test
-    public void registeredAndUnderLimit() {
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/bonusService.csv")
+    public void registeredAndUnderLimit(long expected, long amount, boolean registered) {
         BonusService service = new BonusService();
-        long amount = 1_000;
-        boolean registered = true;
-        long expected = 30;
         long actual = service.calculate(amount, registered);
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void registeredAndOverLimit() {
+    /*@ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/bonusService.csv")
+    public void registeredAndOverLimit(long expected, long amount, boolean registered) {
         BonusService service = new BonusService();
-        long amount = 1_000_000;
-        boolean registered = true;
-        long expected = 500;
+
         long actual = service.calculate(amount, registered);
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void notRegisteredAndUnderLimit() {
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/bonusService.csv")
+    public void notRegisteredAndUnderLimit(long expected, long amount, boolean registered) {
         BonusService service = new BonusService();
-        long amount = 1_000;
-        boolean registered = false;
-        long expected = 10;
+
         long actual = service.calculate(amount, registered);
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void notRegisteredAndOverLimit() {
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/bonusService.csv")
+    public void notRegisteredAndOverLimit(long expected, long amount, boolean registered) {
         BonusService service = new BonusService();
-        long amount = 1_000_000;
-        boolean registered = false;
-        long expected = 500;
+
         long actual = service.calculate(amount, registered);
         Assertions.assertEquals(expected, actual);
-    }
+    }*/
 
 }
